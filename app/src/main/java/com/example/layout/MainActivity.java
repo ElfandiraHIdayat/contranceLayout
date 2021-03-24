@@ -2,6 +2,7 @@ package com.example.layout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,25 +28,39 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 nama = edmail.getText().toString();
                 password = edpassword.getText().toString();
-                if (nama.equals("Elfandira") && password.equals("456123")){
+
+                String email = "elfandirahidayat@gmail.com";
+                String password = "456123789";
+
+                if (nama.isEmpty() || password.isEmpty()){
                     Toast t = Toast.makeText(getApplicationContext()
-                            ,"WAS SUCCESSFUL",Toast.LENGTH_LONG);
+                            ,"Email dan Password wajib diisi",Toast.LENGTH_LONG);
                     t.show();
-                }
-                else if(nama.equals("Elfandira") && !password.equals("1234")){
-                    Toast t = Toast.makeText(getApplicationContext()
-                            ,"Wrong Password",Toast.LENGTH_LONG);
-                    t.show();
-                }
-                else if(!nama.equals("sigit") && password.equals("1234")){
-                    Toast t = Toast.makeText(getApplicationContext()
-                            ,"Wrong Email",Toast.LENGTH_LONG);
-                    t.show();
+
                 }
                 else{
-                    Toast t = Toast.makeText(getApplicationContext()
-                            ,"Incorrect email and password",Toast.LENGTH_LONG);
-                    t.show();
+                    if (nama.equals(email) && password.equals(password)){
+                        Toast t = Toast.makeText(getApplicationContext()
+                                ,"WAS SUCCESSFUL",Toast.LENGTH_LONG);
+                        t.show();
+
+                        Bundle b = new Bundle();
+
+                        b.putString("a",nama.trim());
+
+                        b.putString("b",password.trim());
+
+                        Intent i = new Intent(getApplicationContext(),activity2.class);
+
+                        i.putExtras(b);
+
+                        startActivity(i);
+
+                    }
+                    else{
+                        Toast t = Toast.makeText(getApplicationContext(),
+                                "Login Failed",Toast.LENGTH_LONG);
+                    }
                 }
 
             }
