@@ -45,7 +45,6 @@ public class DaftarActivity extends AppCompatActivity {
             }
         });
     }
-
 }
 
 
