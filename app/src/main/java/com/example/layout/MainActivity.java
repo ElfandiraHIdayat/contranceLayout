@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
                         b.putString("b",password.trim());
 
-                        Intent i = new Intent(getApplicationContext(),activity2.class);
+                        Intent i = new Intent(getApplicationContext(),Home_Activity.class);
 
                         i.putExtras(b);
 

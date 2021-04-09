@@ -1,8 +1,10 @@
 package com.example.layout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +26,13 @@ public class DaftarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daftar);
 
+        edtNama = findViewById(R.id.edNama);
+        edtAlamat = findViewById(R.id.edAlamat);
+        edtEmail = findViewById(R.id.EdEmail);
+        edtPassword = findViewById(R.id.edPass);
+        edtrepass = findViewById(R.id.edrepas);
+        fab = findViewById(R.id.fabSimpan);
+
         //Membuat Method untuk event dari floating button
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,13 +42,26 @@ public class DaftarActivity extends AppCompatActivity {
                         edtAlamat.getText().toString().isEmpty() ||
                         edtEmail.getText().toString().isEmpty() ||
                         edtPassword.getText().toString().isEmpty() ||
-                        edtrepass.getText().toString().isEmpty()) {
+                        edtrepass.getText().toString().isEmpty())
+                {
                     //menampilkan pesan  notifikasi  jika seluruh EditText Wajib diisi
                     Snackbar.make(view, "Wajib mengisi bagian yang kosong !!!", Snackbar.LENGTH_LONG).show();
-                } else {
-                    //Menampilkan pesan bahwa isi dari EditText password dan EditTextPassword
-                    //Tidak sama
-                    Snackbar.make(view, "Password dan Repassword harus sama!!!", Snackbar.LENGTH_LONG).show();
+                }
+                else
+                {
+                    if (edtPassword.getText().toString().equals(edtrepass.getText().toString()))
+                    {
+                        Toast.makeText(getApplicationContext(), "Pendaftaran Berhasil...",
+                                Toast.LENGTH_SHORT).show();
+
+                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(i);
+                    }
+                    else {
+                        //Menampilkan pesan bahwa isi dari EditText password dan EditTextPassword
+                        //Tidak sama
+                        Snackbar.make(view, "Password dan Repassword harus sama!!!", Snackbar.LENGTH_LONG).show();
+                    }
                 }
 
             }
